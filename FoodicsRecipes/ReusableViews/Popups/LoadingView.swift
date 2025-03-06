@@ -14,7 +14,7 @@ struct LoadingView: View {
         ProgressView(msg)
             .controlSize(.large)
             .padding(24)
-            .background(.background.gradient, in: .rect(cornerRadius: 16))
+            .background(.bg.gradient, in: .rect(cornerRadius: 16))
     }
 }
 

@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum AppRoute: Hashable {
-    case splash
+    case landing
     case home
     case recipeDetail(recipe: Recipe)
     case settings

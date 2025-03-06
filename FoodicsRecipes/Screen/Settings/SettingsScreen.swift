@@ -11,7 +11,7 @@ struct SettingsScreen: View {
     var body: some View {
         ZStack {
             ContainerRelativeShape()
-                .fill(.background.gradient)
+                .fill(.bg.gradient)
             
             VStack(spacing: 16) {
                 

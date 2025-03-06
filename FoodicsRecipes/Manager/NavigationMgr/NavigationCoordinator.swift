@@ -12,7 +12,7 @@ struct NavigationCoordinator: View {
 
     var body: some View {
         NavigationStack(path: $navMgr.path) {
-            SplashScreen()
+            LandingScreen()
                 .navigationDestination(for: AppRoute.self) { route in
                     destinationView(for: route)
                         .navigationBarBackButtonHidden()
@@ -24,7 +24,7 @@ struct NavigationCoordinator: View {
     @ViewBuilder
     func destinationView(for route: AppRoute) -> some View {
         switch route {
-        case .splash: SplashScreen()
+        case .landing: LandingScreen()
         case .home: HomeScreen()
         case .recipeDetail(let recipe): RecipeDetailsScreen(vm: RecipeDetailsVM(recipe: recipe))
         case .settings: SettingsScreen()

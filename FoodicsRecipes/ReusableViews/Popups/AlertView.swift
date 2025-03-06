@@ -29,7 +29,7 @@ struct AlertView: View {
         }
         .padding(.vertical, 16)
         .padding(.horizontal, 40)
-        .background(Color.background.gradient, in: .rect(cornerRadius: 24))
+        .background(Color.bg.gradient, in: .rect(cornerRadius: 24))
         .padding(32)
     }
 }

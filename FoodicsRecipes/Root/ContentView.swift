@@ -16,7 +16,7 @@ struct ContentView: View {
             switch nwk.networkStatus {
             case .satisfied:
                 ZStack {
-                    HomeScreen()
+                    NavigationCoordinator()
                         .allowsHitTesting(popupMgr.isPopupVisible ? false : true)
                         .overlay {
                             Color.black.opacity(popupMgr.isPopupVisible ? 0.5 : 0)

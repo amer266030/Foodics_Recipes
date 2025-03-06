@@ -22,7 +22,7 @@ struct AnimatedButton<Content: View>: View {
             }
         }) {
             label()
-                .scaleEffect(isTapped ? 0.8 : 1.0)
+                .scaleEffect(isTapped ? 0.9 : 1.0)
                 .animation(.bouncy(duration: 0.5, extraBounce: 0.2), value: isTapped)
         }
     }
