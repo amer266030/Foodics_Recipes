@@ -21,5 +21,8 @@ struct LandingTabItemsView: View {
             }
         }
         .tabViewStyle(.page)
+        .aspectRatio(2, contentMode: .fit)
+        .padding()
+        .background(.ultraThinMaterial, in: .rect(cornerRadius: 24))
     }
 }

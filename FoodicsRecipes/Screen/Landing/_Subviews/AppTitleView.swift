@@ -12,9 +12,11 @@ struct AppTitleView: View {
         VStack(spacing: 0) {
             Text("Recipes")
                 .font(.largeTitle)
+                .bold()
             
             Text("Magic")
                 .font(.title)
+                .fontWeight(.semibold)
                 .fontWidth(.condensed)
         }
         .foregroundStyle(.bg)

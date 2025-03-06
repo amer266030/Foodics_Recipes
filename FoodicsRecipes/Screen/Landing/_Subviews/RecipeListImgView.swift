@@ -12,6 +12,6 @@ struct RecipeListImgView: View {
         Image(.recipeList)
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .frame(width: UIScreen.width/2)
+            .padding(24)
     }
 }
