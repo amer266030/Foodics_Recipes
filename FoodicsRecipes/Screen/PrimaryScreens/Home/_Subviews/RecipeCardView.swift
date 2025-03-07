@@ -44,15 +44,9 @@ struct RecipeCardView: View {
         .foregroundStyle(.text)
         .padding()
         .background(.regularMaterial, in: .rect(cornerRadius: 16))
+        .shadow(color: .text.opacity(0.3), radius: 1)
         .overlay(alignment: .topTrailing) {
-            Button {
-                isLiked.toggle()
-            } label: {
-                Image(systemName: "heart.fill")
-                    .foregroundStyle(isLiked ? .accent : .text)
-                    .font(.title)
-            }
-            .padding()
+            LikeButton(isLiked: $isLiked)
         }
     }
 }

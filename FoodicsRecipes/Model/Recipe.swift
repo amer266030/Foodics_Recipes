@@ -20,7 +20,7 @@ struct Recipe: Codable, Identifiable, Hashable {
     let difficulty: Difficulty?
     let cuisine: String?
     let caloriesPerServing: Int?
-    let tags: [String]?
+    let tags: RecipeTags?
     let userId: Int?
     let image: String?
     let rating: Double?

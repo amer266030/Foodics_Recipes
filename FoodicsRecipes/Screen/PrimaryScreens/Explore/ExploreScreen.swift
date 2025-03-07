@@ -22,10 +22,42 @@ struct ExploreScreen: View {
                     Text("Look for your favorite recipes")
                         .font(.headline)
                 }
+                Divider()
                 
-                TextField("", text: $vm.searchText)
+                SearchOptionsView(selectedSearchOption: $vm.selectedSearchOption)
+                    .onChange(of: vm.selectedSearchOption) {
+                        vm.searchText = ""
+                    }
+                
+                switch vm.selectedSearchOption {
+                case .name:
+                    SearchTextFieldView(searchText: $vm.searchText, hint: "Margherita")
+                case .tag:
+                    SearchTagView(selectedTag: $vm.selectedTag, tags: vm.tags)
+                case .mealType:
+                    SearchTextFieldView(searchText: $vm.searchText, hint: "Snack")
+                }
+                
+                LargeTitleView(title: "Recipes")
+                
+                ScrollView(.vertical) {
+                    if vm.recipes.isEmpty {
+                        ContentUnavailableView("No Search Results", systemImage: "exclamationmark.triangle.fill", description: Text(""))
+                    } else {
+                        ForEach(vm.recipes) { recipe in
+                            RecipeListItem(recipe: recipe)
+                        }
+                    }
+                }
+                .scrollIndicators(.hidden)
+                .refreshable {
+                    
+                }
             }
             .padding()
+        }
+        .task {
+            if vm.tags.isEmpty { try? await vm.fetchTags() }
         }
     }
 }

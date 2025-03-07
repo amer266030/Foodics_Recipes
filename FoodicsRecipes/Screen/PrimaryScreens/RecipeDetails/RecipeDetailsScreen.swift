@@ -27,7 +27,7 @@ struct RecipeDetailsScreen: View {
                     Text(vm.recipe?.name ?? "?")
                         .font(.headline)
                     
-                    RatingView(rating: Int(vm.recipe?.rating ?? 0), reviewCount: Int(vm.recipe?.rating ?? 0))
+                    RatingView(rating: vm.recipe?.rating ?? 0, reviewCount: Int(vm.recipe?.rating ?? 0))
                     RecipeInfoView(recipe: vm.recipe)
                     
                     // Ingredients Section
