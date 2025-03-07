@@ -7,22 +7,27 @@
 
 import SwiftUI
 
-struct RecipeListItem: View {
+struct RecipeListItemView: View {
     @State private var isLiked = false
     let recipe: Recipe
     
     var body: some View {
         HStack {
             RecipeImageView(imgurl: recipe.image ?? "")
+                .padding(4)
             
             VStack(alignment: .leading) {
                 HStack {
                     Text(recipe.name ?? "")
                         .font(.headline)
+                        .fontWidth(.compressed)
                     Spacer()
                     LikeButton(isLiked: $isLiked)
                 }
-                RatingView(rating: recipe.rating ?? 0, reviewCount: recipe.reviewCount ?? 0)
+                RatingView(rating: recipe.rating ?? 0, reviewCount: recipe.reviewCount ?? 0, withText: false)
+                
+                Divider()
+                
                 HStack {
                     VStack(alignment: .leading, spacing: 8) {
                         InfoItemView(iconName: "clock", title: "\(recipe.prepTimeMinutes ?? 0)")
@@ -38,10 +43,19 @@ struct RecipeListItem: View {
                     }
                 }
             }
+            .padding()
         }
+        .foregroundStyle(.text)
+        .aspectRatio(3, contentMode: .fit)
+        .padding(8)
+        .shadowModifier()
     }
 }
 
 #Preview {
-    RecipeListItem(recipe: MockData.shared.recipies[0])
+    ZStack {
+        Color.bg
+        RecipeListItemView(recipe: MockData.shared.recipies[0])
+            .padding()
+    }
 }

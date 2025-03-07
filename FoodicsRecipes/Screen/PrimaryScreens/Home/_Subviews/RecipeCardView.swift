@@ -15,12 +15,16 @@ struct RecipeCardView: View {
         VStack(alignment: .leading, spacing: 8) {
             RecipeImageView(imgurl: recipe.image ?? "")
             
-            Text(recipe.name ?? "")
-                .font(.subheadline)
-                .fontWeight(.semibold)
-                .fontWidth(.condensed)
-                .lineLimit(2, reservesSpace: true)
-                .multilineTextAlignment(.leading)
+            HStack(spacing: 16) {
+                Text(recipe.name ?? "")
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .fontWidth(.condensed)
+                    .lineLimit(2, reservesSpace: true)
+                    .multilineTextAlignment(.leading)
+                Spacer()
+                LikeButton(isLiked: $isLiked)
+            }
             
             // MARK: - Info Items
             
@@ -43,11 +47,7 @@ struct RecipeCardView: View {
         .fontWidth(.condensed)
         .foregroundStyle(.text)
         .padding()
-        .background(.regularMaterial, in: .rect(cornerRadius: 16))
-        .shadow(color: .text.opacity(0.3), radius: 1)
-        .overlay(alignment: .topTrailing) {
-            LikeButton(isLiked: $isLiked)
-        }
+        .shadowModifier()
     }
 }
 

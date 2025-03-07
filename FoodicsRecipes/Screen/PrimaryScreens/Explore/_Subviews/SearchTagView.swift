@@ -10,6 +10,7 @@ import SwiftUI
 struct SearchTagView: View {
     @Binding var selectedTag: String
     var tags: RecipeTags
+    var action: () -> Void
     
     var body: some View {
         HStack {
@@ -19,6 +20,7 @@ struct SearchTagView: View {
                 ForEach(tags, id: \.self) { tag in
                     Button(tag) {
                         selectedTag = tag
+                        action()
                     }
                 }
             }
@@ -29,5 +31,5 @@ struct SearchTagView: View {
 }
 
 #Preview {
-    SearchTagView(selectedTag: .constant(""), tags: ["123", "aaa"])
+    SearchTagView(selectedTag: .constant(""), tags: ["123", "aaa"]) {}
 }

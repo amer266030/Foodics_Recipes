@@ -10,13 +10,20 @@ import SwiftUI
 struct SearchTextFieldView: View {
     @Binding var searchText: String
     var hint: String
+    var action: () -> Void
     
     var body: some View {
         HStack {
             Image(systemName: "magnifyingglass")
-                .foregroundColor(.accent)
+                .foregroundColor(.purp)
             TextField(hint, text: $searchText)
                 .foregroundColor(.text)
+            if !searchText.isEmpty {
+                Button("Search") {
+                    action()
+                }
+            }
+            
         }
         .padding()
         .background(.thinMaterial, in: .rect(cornerRadius: 8))
@@ -25,5 +32,5 @@ struct SearchTextFieldView: View {
 }
 
 #Preview {
-    SearchTextFieldView(searchText: .constant(""), hint: "")
+    SearchTextFieldView(searchText: .constant(""), hint: "") {}
 }

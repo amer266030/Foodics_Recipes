@@ -16,9 +16,8 @@ struct LikeButton: View {
         } label: {
             Image(systemName: "heart.fill")
                 .foregroundStyle(isLiked ? .accent : .text)
-                .font(.title)
+                .font(.headline)
         }
-        .padding()
     }
 }
 

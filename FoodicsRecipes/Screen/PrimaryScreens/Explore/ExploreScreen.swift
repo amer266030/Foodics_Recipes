@@ -26,40 +26,71 @@ struct ExploreScreen: View {
                 
                 SearchOptionsView(selectedSearchOption: $vm.selectedSearchOption)
                     .onChange(of: vm.selectedSearchOption) {
-                        vm.searchText = ""
+                        vm.clearPreviousSelection()
                     }
+                
+                SearchOrderView(selectedOrder: $vm.orderByOption)
                 
                 switch vm.selectedSearchOption {
                 case .name:
-                    SearchTextFieldView(searchText: $vm.searchText, hint: "Margherita")
+                    SearchTextFieldView(searchText: $vm.searchText, hint: "Margherita") {
+                        Task { await vm.fetchRecipes() }
+                    }
                 case .tag:
-                    SearchTagView(selectedTag: $vm.selectedTag, tags: vm.tags)
+                    SearchTagView(selectedTag: $vm.selectedTag, tags: vm.tags) {
+                        Task { await vm.fetchRecipes() }
+                    }
                 case .mealType:
-                    SearchTextFieldView(searchText: $vm.searchText, hint: "Snack")
+                    SearchTextFieldView(searchText: $vm.searchText, hint: "Snack") {
+                        Task { await vm.fetchRecipes() }
+                    }
                 }
                 
                 LargeTitleView(title: "Recipes")
                 
                 ScrollView(.vertical) {
                     if vm.recipes.isEmpty {
-                        ContentUnavailableView("No Search Results", systemImage: "exclamationmark.triangle.fill", description: Text(""))
+                        noContentView()
                     } else {
-                        ForEach(vm.recipes) { recipe in
-                            RecipeListItem(recipe: recipe)
+                        VStack {
+                            ForEach(vm.recipes) { recipe in
+                                Button {
+                                    vm.navigateToDetails(of: recipe)
+                                } label: {
+                                    RecipeListItemView(recipe: recipe)
+                                }
+                            }
+                            
+                            HStack {
+                                Button("Load More?") {
+                                    Task { await vm.fetchRecipes() }
+                                }
+                                .fontWeight(.semibold)
+                                Spacer()
+                            }
                         }
                     }
                 }
                 .scrollIndicators(.hidden)
                 .refreshable {
-                    
+                    Task { await vm.fetchRecipes() }
                 }
             }
             .padding()
         }
+        .onTapGesture { dismissKeyboard() }
         .task {
             if vm.tags.isEmpty { try? await vm.fetchTags() }
         }
     }
+}
+
+fileprivate func noContentView() -> some View {
+    ContentUnavailableView(
+        "No Search Results",
+        systemImage: "exclamationmark.triangle.fill",
+        description: Text("Try searching for popular recipes like 'Pizza', 'Pasta', or 'Chicken'.")
+    )
 }
 
 #Preview {

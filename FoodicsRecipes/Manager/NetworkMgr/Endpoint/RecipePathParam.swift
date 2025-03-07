@@ -8,12 +8,15 @@
 import Foundation
 
 enum RecipePathParam {
+    case search
     case tags
     case tag(String) // e.g. /recipes/tag/Pakistani
     case mealType(String) // e.g. /recipes/meal-type/snack
 
     var path: String {
         switch self {
+        case .search:
+            return "search"
         case .tags:
             return "tags"
         case .tag(let name):
