@@ -26,7 +26,7 @@ struct ColorSchemeCellView: View {
             .font(.headline)
             .padding()
             .background {
-                RoundedRectangle(cornerRadius: 24)
+                RoundedRectangle(cornerRadius: 16)
                     .stroke(.text, lineWidth: 1)
             }
         }

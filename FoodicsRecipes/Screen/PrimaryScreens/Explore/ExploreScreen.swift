@@ -24,26 +24,31 @@ struct ExploreScreen: View {
                 }
                 Divider()
                 
-                SearchOptionsView(selectedSearchOption: $vm.selectedSearchOption)
-                    .onChange(of: vm.selectedSearchOption) {
-                        vm.clearPreviousSelection()
+                DisclosureGroup("Filters") {
+                    VStack(alignment: .leading, spacing: 24) {
+                        SearchOptionsView(selectedSearchOption: $vm.selectedSearchOption)
+                            .onChange(of: vm.selectedSearchOption) {
+                                vm.clearPreviousSelection()
+                            }
+                        
+                        SearchOrderView(selectedOrder: $vm.orderByOption)
+                        
+                        switch vm.selectedSearchOption {
+                        case .name:
+                            SearchTextFieldView(searchText: $vm.searchText, hint: "Margherita") {
+                                Task { await vm.fetchRecipes() }
+                            }
+                        case .tag:
+                            SearchTagView(selectedTag: $vm.selectedTag, tags: vm.tags) {
+                                Task { await vm.fetchRecipes() }
+                            }
+                        case .mealType:
+                            SearchTextFieldView(searchText: $vm.searchText, hint: "Snack") {
+                                Task { await vm.fetchRecipes() }
+                            }
+                        }
                     }
-                
-                SearchOrderView(selectedOrder: $vm.orderByOption)
-                
-                switch vm.selectedSearchOption {
-                case .name:
-                    SearchTextFieldView(searchText: $vm.searchText, hint: "Margherita") {
-                        Task { await vm.fetchRecipes() }
-                    }
-                case .tag:
-                    SearchTagView(selectedTag: $vm.selectedTag, tags: vm.tags) {
-                        Task { await vm.fetchRecipes() }
-                    }
-                case .mealType:
-                    SearchTextFieldView(searchText: $vm.searchText, hint: "Snack") {
-                        Task { await vm.fetchRecipes() }
-                    }
+                    .padding(.vertical)
                 }
                 
                 LargeTitleView(title: "Recipes")

@@ -22,6 +22,7 @@ struct SearchTextFieldView: View {
                 Button("Search") {
                     action()
                 }
+                .buttonStyle(.borderedProminent)
             }
             
         }

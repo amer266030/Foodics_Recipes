@@ -15,7 +15,7 @@ struct ShadowModifier: ViewModifier {
                     .fill(
                         .bg.gradient
                             .shadow(.inner(color: .bg.opacity(0.5), radius: 4, x: 2, y: 2))
-                            .shadow(.inner(color: .text.opacity(0.3), radius: 4, x: -2, y: -2))
+                            .shadow(.inner(color: .text.opacity(0.3), radius: 2, x: -2, y: -2))
                     )
             }
     }
