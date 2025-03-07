@@ -13,10 +13,7 @@ struct RecipeCardView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Image(.r1)
-                .resizable()
-                .aspectRatio(1, contentMode: .fit)
-                .clipShape(.rect(cornerRadius: 16))
+            RecipeImageView(imgurl: recipe.image ?? "")
             
             Text(recipe.name ?? "")
                 .font(.subheadline)
@@ -29,16 +26,16 @@ struct RecipeCardView: View {
             
             HStack {
                 VStack(alignment: .leading, spacing: 8) {
-                    infoItemView(iconName: "clock", title: "\(recipe.prepTimeMinutes ?? 0)")
-                    infoItemView(iconName: "bolt.trianglebadge.exclamationmark", title: "\(recipe.difficulty ?? .unknown)")
+                    InfoItemView(iconName: "clock", title: "\(recipe.prepTimeMinutes ?? 0)")
+                    InfoItemView(iconName: "bolt.trianglebadge.exclamationmark", title: "\(recipe.difficulty ?? .unknown)")
                         .foregroundStyle(recipe.difficulty?.color ?? .gray)
                 }
                 
                 Spacer()
                 
                 VStack(alignment: .leading, spacing: 8) {
-                    infoItemView(iconName: "fork.knife.circle", title: "\(recipe.cuisine ?? "?")")
-                    infoItemView(iconName: "person", title: "\(recipe.servings ?? 0)")
+                    InfoItemView(iconName: "fork.knife.circle", title: "\(recipe.cuisine ?? "?")")
+                    InfoItemView(iconName: "person", title: "\(recipe.servings ?? 0)")
                 }
             }
         }
@@ -57,16 +54,6 @@ struct RecipeCardView: View {
             }
             .padding()
         }
-    }
-}
-
-fileprivate func infoItemView(iconName: String, title: String) -> some View {
-    HStack {
-        Image(systemName: iconName)
-            .foregroundStyle(.purp)
-        Text(title)
-            .fontWidth(.compressed)
-            .lineLimit(1)
     }
 }
 

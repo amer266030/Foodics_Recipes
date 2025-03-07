@@ -28,7 +28,6 @@ struct NavigationCoordinator: View {
         case .primary: PrimaryScreen()
         case .recipeDetail(let recipe):
             RecipeDetailsScreen(vm: RecipeDetailsVM(recipe: recipe))
-                .toolbar { ToolbarItem(placement: .topBarLeading) { NavBackButton() }}
         case .settings: SettingsScreen()
         }
     }

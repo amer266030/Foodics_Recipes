@@ -19,10 +19,6 @@ struct HomeScreen: View {
             VStack(alignment: .leading, spacing: 24) {
                 LargeTitleView(title: "Recipes")
                 
-                ScrollView(.horizontal) {
-                    
-                }
-                
                 ScrollView(.vertical) {
                     LazyVGrid(columns: createGridItems(numItems: 2), spacing: 16) {
                         ForEach(vm.recipes, id: \.iterationID) { recipe in
@@ -33,6 +29,7 @@ struct HomeScreen: View {
                             }
                         }
                     }
+                    Text("Load more?")
                 }
                 .scrollIndicators(.hidden)
                 .refreshable {

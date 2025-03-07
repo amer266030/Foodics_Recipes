@@ -17,6 +17,9 @@ struct NavBackButton: View {
         } label: {
             HStack(spacing: 8) {
                 Image(systemName: "arrow.left")
+                    .font(.headline)
+                    .padding(16)
+                    .background(.regularMaterial, in: .circle)
                 Text(previousViewName)
             }
         }

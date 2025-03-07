@@ -13,7 +13,7 @@ struct ChefHatImgView: View {
             Image(.chefHat)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: UIScreen.width/3)
+                .frame(width: UIScreen.width/2)
         }
         .frame(maxWidth: .infinity)
     }

@@ -9,12 +9,12 @@ import SwiftUI
 
 struct SettingsScreen: View {
     var body: some View {
-        ZStack {
+        ZStack(alignment: .topLeading) {
             ContainerRelativeShape()
                 .fill(.bg.gradient)
             
             VStack(spacing: 16) {
-                
+                LargeTitleView(title: "Settings")
             }
         }
     }

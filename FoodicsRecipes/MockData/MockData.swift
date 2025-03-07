@@ -40,7 +40,7 @@ class MockData {
                     "Italian"
                 ],
                 userId: 99,
-                image: "urlString",
+                image: "https://cdn.dummyjson.com/recipe-images/1.webp",
                 rating: 4.4,
                 reviewCount: 2,
                 mealType: ["Dinner"]
@@ -68,7 +68,7 @@ class MockData {
                     "Sandwitch"
                 ],
                 userId: 88,
-                image: "urlString",
+                image: "https://cdn.dummyjson.com/recipe-images/1.webp",
                 rating: 4.0,
                 reviewCount: 23,
                 mealType: ["Lunch"]
