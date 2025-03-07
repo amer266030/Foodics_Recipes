@@ -17,7 +17,7 @@ enum Difficulty: String, Codable {
     var color: Color {
         switch self {
         case .easy: .green
-        case .medium: .yellow
+        case .medium: .orange
         case .hard: .red
         case .difficult: .red
         case .unknown: .gray

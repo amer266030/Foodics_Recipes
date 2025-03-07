@@ -9,4 +9,8 @@ import Foundation
 
 struct RecipesAPI {
     static let baseURL = "https://dummyjson.com/recipes"
+    
+    static func createQueryItems(_ params: [RecipeQueryParam: String]) -> [URLQueryItem] {
+        return params.map { URLQueryItem(name: $0.key.rawValue, value: $0.value) }
+    }
 }

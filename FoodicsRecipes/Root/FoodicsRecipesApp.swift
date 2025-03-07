@@ -12,6 +12,7 @@ struct FoodicsRecipesApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .darkModeModifier()
         }
     }
 }

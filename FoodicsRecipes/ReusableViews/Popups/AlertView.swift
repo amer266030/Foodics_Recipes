@@ -9,6 +9,8 @@ import SwiftUI
 
 struct AlertView: View {
     var popupMgr = PopupMgr.shared
+    var actionTitle: String?
+    var action: (() -> Void)?
     
     var body: some View {
         VStack(spacing: 16) {
@@ -19,13 +21,32 @@ struct AlertView: View {
                 .font(.caption)
                 .fontWeight(.light)
                 .lineLimit(6)
-            Button("Dismiss") {
-                withAnimation(.easeOut(duration: 0.3)) {
-                    popupMgr.dismissAlert()
+            
+            HStack(spacing: 16) {
+                Button {
+                    withAnimation(.easeOut(duration: 0.3)) {
+                        popupMgr.dismissAlert()
+                    }
+                } label: {
+                    Text("Dismiss")
+                        .frame(maxWidth: .infinity)
+                }
+                .padding()
+                .buttonStyle(.borderedProminent)
+                
+                if let action = popupMgr.alertAction, let actionTitle = popupMgr.actionTitle {
+                    Button {
+                        popupMgr.dismissAlert()
+                        action()
+                    } label: {
+                        Text(actionTitle)
+                            .frame(maxWidth: .infinity)
+                    }
+                    .padding()
+                    .buttonStyle(.borderedProminent)
                 }
             }
-            .padding()
-            .buttonStyle(.borderedProminent)
+            
         }
         .padding(.vertical, 16)
         .padding(.horizontal, 40)
@@ -35,5 +56,5 @@ struct AlertView: View {
 }
 
 #Preview {
-    AlertView()
+    AlertView() {}
 }

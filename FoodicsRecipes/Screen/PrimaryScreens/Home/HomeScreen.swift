@@ -20,21 +20,26 @@ struct HomeScreen: View {
                 LargeTitleView(title: "Recipes")
                 
                 ScrollView(.vertical) {
-                    LazyVGrid(columns: createGridItems(numItems: 2), spacing: 16) {
-                        ForEach(vm.recipes, id: \.iterationID) { recipe in
-                            Button {
-                                vm.navigateToDetails(of: recipe)
-                            } label: {
-                                RecipeCardView(recipe: recipe)
+                    LazyVStack(spacing: 24) {
+                        LazyVGrid(columns: createGridItems(numItems: 2), spacing: 16) {
+                            ForEach(vm.recipes, id: \.iterationID) { recipe in
+                                Button {
+                                    vm.navigateToDetails(of: recipe)
+                                } label: {
+                                    RecipeCardView(recipe: recipe)
+                                }
                             }
                         }
                     }
-                    Text("Load more?")
+                    HStack {
+                        Button("Load More?") {
+                            Task { try? await vm.fetchRecipes() }
+                        }
+                        .fontWeight(.semibold)
+                        Spacer()
+                    }
                 }
                 .scrollIndicators(.hidden)
-                .refreshable {
-                    Task { try? await vm.fetchRecipes() }
-                }
             }
             .padding()
         }

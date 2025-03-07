@@ -13,6 +13,7 @@ class HomeVM {
     private let popupMgr = PopupMgr.shared
     private let navMgr = NavigationMgr.shared
     private let httpClient = HTTPClient()
+    private let limit = 10
     var recipes: [Recipe] = []
     
     func fetchRecipes() async throws {
@@ -21,8 +22,14 @@ class HomeVM {
         } else {
             popupMgr.showLoading()
             do {
+                var components = URLComponents(string: RecipesAPI.baseURL)!
+                components.queryItems = RecipesAPI.createQueryItems([
+                    .limit: "\(limit)",
+                    .skip: "\(recipes.count)"
+                ])
+                
                 guard let url = URL(string: RecipesAPI.baseURL) else { return }
-                let resource = Resource(url: url, modelType: RecipeResponse.self)
+                let resource = Resource(url: url, method: .get(components.queryItems ?? []), modelType: RecipeResponse.self)
                 let response = try await httpClient.load(resource)
                 if let newRecipies = response.recipes {
                     recipes += newRecipies
