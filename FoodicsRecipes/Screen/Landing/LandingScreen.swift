@@ -11,16 +11,18 @@ struct LandingScreen: View {
     @Bindable var vm = LandingVM()
     
     var body: some View {
-        ZStack(alignment: .top) {
-            backgroundView()
+        ZStack(alignment: .topLeading) {
+            LandingBGImageView()
             
-            VStack(spacing: 24) {
-                ChefHatImgView()
-                AppTitleView()
-                
+            VStack(alignment: .leading, spacing: 24) {
                 Spacer()
-                
+                ChefHatImgView()
+                Spacer()
+                AppTitleView()
                 LandingTabItemsView(vm: vm)
+                    .onReceive(vm.timer) { _ in
+                        vm.currentTab = vm.currentTab.next()
+                    }
                 
                 AnimatedButton {
                     vm.navigateToHome()
@@ -29,25 +31,8 @@ struct LandingScreen: View {
                 }
             }
             .padding()
-            .onReceive(vm.timer) { _ in
-                vm.currentTab = vm.currentTab.next()
-            }
         }
-        
     }
-}
-
-fileprivate func backgroundView() -> some View {
-    Group {
-        Image(.landingBg)
-            .resizable()
-            .opacity(0.8)
-        
-        TiltedShape()
-            .fill(.text.gradient)
-            .aspectRatio(1, contentMode: .fit)
-    }
-    .ignoresSafeArea()
 }
 
 #Preview {

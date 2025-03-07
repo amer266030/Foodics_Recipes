@@ -11,22 +11,31 @@ import Foundation
 class HomeVM {
     private let isPreview: Bool = ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
     private let popupMgr = PopupMgr.shared
+    private let navMgr = NavigationMgr.shared
     private let httpClient = HTTPClient()
-    var recipies: [Recipe] = []
+    var recipes: [Recipe] = []
     
     func fetchRecipes() async throws {
         if isPreview {
-            recipies = MockData.shared.recipies
+            recipes = MockData.shared.recipies
         } else {
             popupMgr.showLoading()
             do {
                 guard let url = URL(string: RecipesAPI.baseURL) else { return }
-                let resource = Resource(url: url, modelType: [Recipe].self)
-                recipies = try await httpClient.load(resource)
+                let resource = Resource(url: url, modelType: RecipeResponse.self)
+                let response = try await httpClient.load(resource)
+                if let newRecipies = response.recipes {
+                    recipes += newRecipies
+                }
                 popupMgr.dismissLoading()
             } catch let error{
                 popupMgr.showAlert(title: "Oops!", msg: "something went wrong while loading recipes\n\(error.localizedDescription)")
             }
         }
     }
+    
+    func navigateToDetails(of recipe: Recipe) {
+        navMgr.push(.recipeDetail(recipe: recipe))
+    }
+    
 }

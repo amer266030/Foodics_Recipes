@@ -9,17 +9,10 @@ import SwiftUI
 
 struct AppTitleView: View {
     var body: some View {
-        VStack(spacing: 0) {
-            Text("Recipes")
-                .font(.largeTitle)
-                .bold()
-            
-            Text("Magic")
-                .font(.title)
-                .fontWeight(.semibold)
-                .fontWidth(.condensed)
-        }
-        .foregroundStyle(.bg)
+        Text("Recipes Magic")
+        .font(.largeTitle)
+        .bold()
+        .foregroundStyle(.text)
     }
 }
 

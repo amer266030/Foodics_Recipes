@@ -9,10 +9,13 @@ import SwiftUI
 
 struct ChefHatImgView: View {
     var body: some View {
-        Image(.chefHat)
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(width: UIScreen.width/5)
+        HStack {
+            Image(.chefHat)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: UIScreen.width/3)
+        }
+        .frame(maxWidth: .infinity)
     }
 }
 

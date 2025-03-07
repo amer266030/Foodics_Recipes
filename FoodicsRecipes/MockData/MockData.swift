@@ -32,7 +32,7 @@ class MockData {
                 prepTimeMinutes: 12,
                 cookTimeMinutes: 20,
                 servings: 4,
-                difficulty: "Easy",
+                difficulty: .easy,
                 cuisine: "Italian",
                 caloriesPerServing: 200,
                 tags: [
@@ -60,7 +60,7 @@ class MockData {
                 prepTimeMinutes: 5,
                 cookTimeMinutes: 10,
                 servings: 1,
-                difficulty: "Medium",
+                difficulty: .medium,
                 cuisine: "American",
                 caloriesPerServing: 250,
                 tags: [

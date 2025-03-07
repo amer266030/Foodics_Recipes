@@ -8,5 +8,5 @@
 import SwiftUI
 
 extension LinearGradient {
-    static let primary = LinearGradient(colors: [.primary, .bg], startPoint: .top, endPoint: .bottom)
+    static let primary = LinearGradient(colors: [.purp, .bg, .bg.opacity(0.5)], startPoint: .top, endPoint: .bottom)
 }

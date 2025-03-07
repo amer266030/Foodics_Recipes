@@ -25,8 +25,10 @@ struct NavigationCoordinator: View {
     func destinationView(for route: AppRoute) -> some View {
         switch route {
         case .landing: LandingScreen()
-        case .home: HomeScreen()
-        case .recipeDetail(let recipe): RecipeDetailsScreen(vm: RecipeDetailsVM(recipe: recipe))
+        case .primary: PrimaryScreen()
+        case .recipeDetail(let recipe):
+            RecipeDetailsScreen(vm: RecipeDetailsVM(recipe: recipe))
+                .toolbar { ToolbarItem(placement: .topBarLeading) { NavBackButton() }}
         case .settings: SettingsScreen()
         }
     }

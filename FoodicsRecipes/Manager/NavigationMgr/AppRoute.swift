@@ -9,7 +9,7 @@ import SwiftUI
 
 enum AppRoute: Hashable {
     case landing
-    case home
+    case primary
     case recipeDetail(recipe: Recipe)
     case settings
 }

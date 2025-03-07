@@ -15,6 +15,6 @@ class LandingVM {
     var timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
     
     func navigateToHome() {
-        navMgr.push(.home)
+        navMgr.replaceWith(.primary)
     }
 }
