@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct HTTPClient {
+struct HTTPClient: HTTPClientProtocol {
     private let session: URLSession
     
     init() {

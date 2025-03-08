@@ -17,8 +17,10 @@ struct LandingScreen: View {
             VStack(alignment: .leading, spacing: 24) {
                 Spacer()
                 ChefHatImgView()
+                    .accessibilityIdentifier("chefHatImage")
                 Spacer()
                 AppTitleView()
+                    .accessibilityIdentifier("appTitle")
                 LandingTabItemsView(vm: vm)
                     .onReceive(vm.timer) { _ in
                         vm.currentTab = vm.currentTab.next()
@@ -29,6 +31,7 @@ struct LandingScreen: View {
                 } label: {
                     ExploreBtnView()
                 }
+                .accessibilityIdentifier("exploreButton")
             }
             .padding()
         }

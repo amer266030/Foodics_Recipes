@@ -18,6 +18,7 @@ struct HomeScreen: View {
             
             VStack(alignment: .leading, spacing: 24) {
                 LargeTitleView(title: "Recipes")
+                    .accessibilityIdentifier("homeScreenTitle")
                 
                 ScrollView(.vertical) {
                     LazyVStack(spacing: 24) {
@@ -28,6 +29,7 @@ struct HomeScreen: View {
                                 } label: {
                                     RecipeCardView(recipe: recipe)
                                 }
+                                .accessibilityIdentifier("recipe_\(recipe.iterationID!)")
                             }
                         }
                     }
@@ -35,6 +37,7 @@ struct HomeScreen: View {
                         Button("Load More?") {
                             Task { try? await vm.fetchRecipes() }
                         }
+                        .accessibilityIdentifier("loadMoreButton")
                         .fontWeight(.semibold)
                         Spacer()
                     }
