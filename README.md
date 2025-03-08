@@ -66,7 +66,7 @@ Recipes Magic is a SwiftUI-based iOS application designed to allow users to brow
 3. **Pagination**: The app **fetches more recipes using a button at the bottom of the list** when scrolling to the bottom.
 4. **Search & Sorting**:
    - Users can **search recipes by name**.
-   - Recipes can be **sorted alphabetically or by relevance**.
+   - Recipes can be **sorted alphabetically in ascending or decending order**.
 5. **UI Tests**: Implemented UI tests using `XCTest` to verify **screen elements, navigation, and actions**.
 6. **Improved UI/UX**:
    - Includes **animations and gradients** for better user experience.
