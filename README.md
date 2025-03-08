@@ -77,7 +77,7 @@ Recipes Magic is a SwiftUI-based iOS application designed to allow users to brow
 ### Prerequisites
 
 - Xcode (Latest Version)
-- iOS 16+ Simulator or Physical Device
+- iOS 18+ Simulator or Physical Device
 
 ### Installation
 
