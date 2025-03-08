@@ -26,6 +26,7 @@ struct RecipeDetailsScreen: View {
                     
                     Text(vm.recipe?.name ?? "?")
                         .font(.headline)
+                        .accessibilityIdentifier("recipeDetailTitle")
                     
                     RatingView(rating: vm.recipe?.rating ?? 0, reviewCount: Int(vm.recipe?.rating ?? 0))
                     RecipeInfoView(recipe: vm.recipe)

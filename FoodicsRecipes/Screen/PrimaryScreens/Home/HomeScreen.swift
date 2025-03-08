@@ -29,7 +29,7 @@ struct HomeScreen: View {
                                 } label: {
                                     RecipeCardView(recipe: recipe)
                                 }
-                                .accessibilityIdentifier("recipe_\(recipe.iterationID!)")
+                                .accessibilityIdentifier("recipe_\(recipe.id ?? 1)")
                             }
                         }
                     }
