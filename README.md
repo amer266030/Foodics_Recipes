@@ -63,7 +63,7 @@ Recipes Magic is a SwiftUI-based iOS application designed to allow users to brow
 
 1. **Dependency Injection**: The **network service, and api service are injected** into ViewModels, making it testable and modular.
 2. **Pull-to-Refresh**: Users can **swipe down** to refresh the recipe list.
-3. **Pagination**: The app **fetches more recipes dynamically** when scrolling to the bottom.
+3. **Pagination**: The app **fetches more recipes using a button at the bottom of the list** when scrolling to the bottom.
 4. **Search & Sorting**:
    - Users can **search recipes by name**.
    - Recipes can be **sorted alphabetically or by relevance**.
