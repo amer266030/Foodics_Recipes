@@ -18,12 +18,12 @@ struct HTTPClient {
     
     func load<T: Codable>(_ resource: Resource<T>) async throws -> T {
         var request = URLRequest(url: resource.url)
-        
+
         switch resource.method {
         case .get(let queryItems):
-            var componenets = URLComponents(url: resource.url, resolvingAgainstBaseURL: false)
-            componenets?.queryItems = queryItems
-            guard let url = componenets?.url else {
+            var components = URLComponents(url: resource.url, resolvingAgainstBaseURL: false)
+            components?.queryItems = queryItems
+            guard let url = components?.url else {
                 throw NetworkError.badRequest
             }
             request.url = url
@@ -33,33 +33,45 @@ struct HTTPClient {
         case .delete:
             request.httpMethod = resource.method.name
         }
-   
+
         if let headers = resource.headers {
             for (key, value) in headers {
                 request.setValue(value, forHTTPHeaderField: key)
             }
         }
-        
-        let (data, response) = try await session.data(for: request)
-        
-        guard let httpResponse = response as? HTTPURLResponse else {
-            throw NetworkError.invalidResponse
-        }
-        
-        switch httpResponse.statusCode {
-        case 200...299:
-            break
-        default:
-            let errorResponse = try JSONDecoder().decode(ErrorResponse.self, from: data)
-            throw NetworkError.errorResponse(errorResponse)
-        }
-        
+
         do {
-            let result = try JSONDecoder().decode(resource.modelType, from: data)
-            return result
+            let (data, response) = try await session.data(for: request)
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                throw NetworkError.invalidResponse
+            }
+            
+            print(httpResponse.statusCode)
+            
+            switch httpResponse.statusCode {
+            case 200...299:
+                break
+            default:
+                do {
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase // Optional, ensures correct key matching
+                    
+                    let errorResponse = try decoder.decode(ErrorResponse.self, from: data)
+                    throw NetworkError.errorResponse(errorResponse)
+                } catch let decodingError {
+                    throw NetworkError.decodingError(decodingError)
+                }
+            }
+            
+            return try JSONDecoder().decode(resource.modelType, from: data)
+
+        } catch _ as URLError {
+            throw NetworkError.badRequest // Convert URLError into a NetworkError
         } catch {
-            throw NetworkError.decodingError(error)
+            throw NetworkError.decodingError(error) // Handle other unexpected errors
         }
     }
+
     
 }
