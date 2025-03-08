@@ -123,3 +123,10 @@ Recipes Magic is a SwiftUI-based iOS application designed to allow users to brow
 - [GitHub](https://github.com/amer266030)
 - [LinkedIn](https://www.linkedin.com/in/amer-alyusuf)
 
+## App Screenshots
+
+![Screen 1](screens/screen1.jpg)
+![Screen 2](screens/screen2.jpg)
+![Screen 3](screens/screen3.jpg)
+![Screen 4](screens/screen4.jpg)
+![Screen 5](screens/screen5.jpg)
